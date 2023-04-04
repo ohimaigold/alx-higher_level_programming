@@ -1,10 +1,12 @@
 #!/usr/bin/python3
-"""
-locked_class
-"""
+# 101-locked_class.py
+
+"""Defines a locked class."""
 
 
 class LockedClass:
+    
+    #  define the available slots that can be created
+    
 
-    #  available slots
-    __slots__ = ('first_name')
+    __slots__ = ["first_name"]
