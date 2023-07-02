@@ -1,2 +1,3 @@
-#!/bin/bash/env bash 
-curl -so /dev/null -w '%{size_download}\n' $1
+#!/bin/bash
+# This program takes in a URL, sends a request to that URL, and displays the size of the body of the response.
+curl -sI "$1" | grep "Content-Length:" | cut -d' ' -f2
