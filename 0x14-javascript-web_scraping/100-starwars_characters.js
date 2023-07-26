@@ -1,36 +1,21 @@
 #!/usr/bin/node
 
-const request = require('request');
-const movieId = process.argv[2];
-const url = 'https://swapi-api.alx-tools.com/api/films/';
-
-request(url + movieId, function (error, response, body) {
+const req = require('request');
+const id = process.argv[2];
+const url = 'https://swapi-api.hbtn.io/api/films/';
+req.get(url + id, function (error, res, body) {
   if (error) {
-    console.error(error);
-    return;
+    console.log(error);
   }
-
-  if (response.statusCode !== 200) {
-    console.error(`Unexpected status code: ${response.statusCode}`);
-    return;
-  }
-
-  const movieData = JSON.parse(body);
-  console.log(`Characters in ${movieData.title}:`);
-  movieData.characters.forEach((characterUrl) => {
-    request(characterUrl, function (error, response, body) {
+  const data = JSON.parse(body);
+  const dd = data.characters;
+  for (const i of dd) {
+    req.get(i, function (error, res, body1) {
       if (error) {
-        console.error(error);
-        return;
+        console.log(error);
       }
-
-      if (response.statusCode !== 200) {
-        console.error(`Unexpected status code: ${response.statusCode}`);
-        return;
-      }
-
-      const characterData = JSON.parse(body);
-      console.log(`- ${characterData.name}`);
+      const data1 = JSON.parse(body1);
+      console.log(data1.name);
     });
-  });
+  }
 });
